@@ -1,13 +1,44 @@
 import turtle as t
 class pig:
-    def head(self, color):
+    def __init__(self, color):
+        # 设置属性
+        self.color = color
+
+    def tail(self):
+        #尾巴
+        t.pensize(4)
+
+        t.color(self.color)
+
+        t.pu()
+
+        t.seth(90)
+
+        t.fd(70)
+
+        t.seth(0)
+
+        t.fd(95)
+
+        t.pd()
+
+        t.seth(0)
+
+        t.circle(70,20)
+
+        t.circle(10,330)
+
+        t.circle(70,30)
+
+
+    def head(self):
         t.pensize(4)
 
         t.hideturtle()
 
         t.colormode(255)
 
-        t.color((255,155,192),color)
+        t.color((255,155,192),self.color)
 
         t.setup(840,500)
 
@@ -66,7 +97,7 @@ class pig:
 
         t.circle(5)
 
-        t.color(160,82,45)
+        t.color(self.color)
 
         t.end_fill()
 
@@ -86,12 +117,12 @@ class pig:
 
         t.circle(5)
 
-        t.color(160,82,45)
+        t.color(self.color)
 
         t.end_fill()
 
         #头
-        t.color((255,155,192),"pink")
+        t.color((255,155,192),self.color)
 
         t.pu()
 
@@ -153,7 +184,7 @@ class pig:
         t.end_fill()
 
         #耳朵
-        t.color((255,155,192),"pink")
+        t.color((255,155,192),self.color)
 
         t.pu()
 
@@ -326,5 +357,8 @@ class pig:
 
         t.circle(40,80)
 
-little_pig=pig()
-little_pig.head("green")
+yellow_little_pig=pig("yellow")
+blue_little_pig=pig("blue")
+yellow_little_pig.head()
+blue_little_pig.tail()
+t.done()
