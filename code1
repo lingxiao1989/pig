@@ -1,8 +1,8 @@
 import requests
 
 def run():
-response = requests.get(http://www.baidu.com)
-print(reponse.text)
+    response = requests.get("http://www.baidu.com")
+    print(response.text)
 
 if __name__== "__main__":
     run()
