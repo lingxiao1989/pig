@@ -1,0 +1,8 @@
+import requests
+
+def run():
+response = requests.get(http://www.baidu.com)
+print(reponse.text)
+
+if __name__== "__main__":
+    run()
