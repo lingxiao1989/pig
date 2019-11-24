@@ -1,0 +1,43 @@
+import requests  # 用于获取网页
+from bs4 import BeautifulSoup  # 用于分析网页
+import re  # 用于在网页中搜索我们需要的关键字
+
+#写入文件
+def writefile(news_title,news_author,news_time,news_link):
+    file = open('C:/Users/ling1/Desktop/Workspace2/SohuNews.txt', 'a')
+    file.write(news_title+'\t'+news_author+'\t'+news_time+'\t'+news_link+'\n')
+    file.close()
+
+#获取网页
+baseurl = 'http://news.sohu.com/'
+html = requests.get(baseurl)
+#print(html.text)
+
+#解析网页
+soup=BeautifulSoup(html.text,'html.parser')
+newslist=soup.find_all(class_='list16')
+#print(newslist)
+
+for news in newslist:
+    try:
+        news_title=news.li.a['title']
+        if  re.match(r'http:',news.li.a['href']):
+            news_link =  news.li.a['href']
+        else:
+            news_link = 'http:' + news.li.a['href']
+    except:
+        print('无法处理')
+    else:
+        # 在此循环内部续写
+        newshtml=requests.get(news_link)
+        newssoup=BeautifulSoup(newshtml.text,'html.parser')
+        try:
+            news_time=newssoup.find_all(class_='time')[0].text
+            news_author=newssoup.find_all('h4')[0].text
+        except:
+            print('无法处理')
+        else:
+            print(news_title, news_time, news_author, news_link)
+            #writefile(news_title,news_author,news_time,news_link)
+            
+print('抓取完毕')
