@@ -38,6 +38,8 @@ class Gun:
         if self.bullet_count <= 0:
             print ('[%s] 没有子弹了...' % self.model)
             return
+            
+#任务：新建一个动物类，这种动物有自己的玩法，让小明和他玩            
         self.bullet_count -= 1
         print ('[%s] 突突突...[%d]' %(self.model,self.bullet_count))
 
