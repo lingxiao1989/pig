@@ -1,0 +1,2 @@
+tsinghua_mirror_address
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
