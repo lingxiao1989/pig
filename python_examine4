@@ -68,6 +68,13 @@ ak47 = Gun('AK47')
 #TO DO: 新建一个士兵，给他ak47，完成上子弹，攻击的步骤
  
 #再来一个问题：小明和动物玩
+#TO DO：新建一个动物类，这种动物有自己的玩法，让小明和他玩
+class xxx():
+
+
+####################################################
+
+
 class XiaotianDog(object):
     def __init__(self,name):
         self.name = name
@@ -88,4 +95,3 @@ wangcai = XiaotianDog('旺财')
 xiaoming = Person('小明')
 xiaoming.play_with_animal(wangcai)
 
-#任务：新建一个动物类，这种动物有自己的玩法，让小明和他玩
