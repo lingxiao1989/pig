@@ -87,3 +87,5 @@ class Person(object):
 wangcai = XiaotianDog('旺财')
 xiaoming = Person('小明')
 xiaoming.play_with_animal(wangcai)
+
+#任务：新建一个动物类，这种动物有自己的玩法，让小明和他玩
