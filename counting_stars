@@ -1,3 +1,4 @@
+#part1: 引入python包
 from matplotlib import pyplot as plt
 from skimage import data
 from skimage.feature import blob_dog, blob_log, blob_doh
@@ -5,6 +6,7 @@ from math import sqrt
 from skimage.color import rgb2gray
 import glob
 from skimage.io import imread
+
 
 def function1():
     example_file = glob.glob(r"C:/Users/ling1/Desktop/Workspace2/wint_sky.gif")[0]
@@ -14,5 +16,26 @@ def function1():
     plt.show()
     return im
 
+def function2(im):
+    #part3: 使用算法数星星
+    blobs_log = blob_log(im, max_sigma=30, num_sigma=10, threshold=.1)
+    # Compute radii in the 3rd column.
+    blobs_log[:, 2] = blobs_log[:, 2] * sqrt(2)
+    numrows = len(blobs_log)
+    print("Number of stars counted : " ,numrows)
+    return blobs_log
+
+def function3(im, blobs_log):
+    #part4: 验证
+    fig, ax = plt.subplots(1, 1)
+    plt.imshow(im, cmap=plt.cm.gray)
+    for blob in blobs_log:
+        y, x, r = blob
+        c = plt.Circle((x, y), r+5, color='lime', linewidth=2, fill=False)
+        ax.add_patch(c)
+    plt.show()
+
 if __name__=="__main__":
-    function1()
+    image=function1()
+    blobs_log=function2(image)
+    function3(image,blobs_log)
