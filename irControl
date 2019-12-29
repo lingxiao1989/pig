@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_B, SpeedPercent, MoveTank
+from ev3dev2.sensor import INPUT_1,INPUT_2,INPUT_3,INPUT_4
+from ev3dev2.sensor.lego import TouchSensor,ColorSensor,InfraredSensor
+from ev3dev2.led import Leds
+from ev3dev2.sound import Sound
+import time,os
+os.system('setfont ' + 'Lat15-Terminus24x12')
+
+ifs = InfraredSensor()
+sound = Sound()
+lm_a = LargeMotor(OUTPUT_A)
+lm_b = LargeMotor(OUTPUT_B)
+
+sound.speak('process begin')
+
+#左上按钮方法
+def top_left(state):
+    # sound.speak('forward')
+    print('forward')
+
+    if state == True:
+        lm_a.run_forever(speed_sp=200)
+        lm_b.run_forever(speed_sp=200)
+    else:
+        lm_a.stop()
+        lm_b.stop()
+
+#左下按钮方法
+def bottom_left(state):
+    # sound.speak('back')
+    print('back')
+    if state == True:
+        lm_a.run_forever(speed_sp=-200)
+        lm_b.run_forever(speed_sp=-200)
+    else:
+        lm_a.stop()
+        lm_b.stop()
+
+#右上按钮方法
+def top_right(state):
+    # sound.speak('turn left')
+    print('turn left')
+    if state == True:
+        lm_a.run_forever(speed_sp=0)
+        lm_b.run_forever(speed_sp=200)
+    else:
+        lm_a.stop()
+        lm_b.stop()
+
+#右下按钮方法
+def bottom_right(state):
+    # sound.speak('turn right')
+    print('turn right')
+
+    if state == True:
+        lm_a.run_forever(speed_sp=200)
+        lm_b.run_forever(speed_sp=0)
+    else:
+        lm_a.stop()
+        lm_b.stop()
+
+#对按钮事件进行绑定
+ifs.on_channel1_top_left = top_left
+ifs.on_channel1_top_right = top_right
+ifs.on_channel1_bottom_left = bottom_left
+ifs.on_channel1_bottom_right = bottom_right
+
+#循环判断按钮事件
+while True:
+    ifs.process()
+    time.sleep(0.01)
+
